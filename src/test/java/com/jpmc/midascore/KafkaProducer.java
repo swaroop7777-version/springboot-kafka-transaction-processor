@@ -14,6 +14,25 @@ public class KafkaProducer {
         this.topic = topic;
         this.kafkaTemplate = kafkaTemplate;
     }
+//    public void send(String transactionLine) {
+//        if (transactionLine == null) return;
+//
+//        String line = transactionLine.trim();
+//        if (line.isEmpty()) return;
+//
+//        // split by comma, allowing any spaces around it
+//        String[] t = line.split("\\s*,\\s*");
+//
+//        if (t.length != 3) {
+//            throw new IllegalArgumentException("Bad transaction line: " + line);
+//        }
+//
+//        long id = Long.parseLong(t[0]);
+//        long account = Long.parseLong(t[1]);
+//        float amount = Float.parseFloat(t[2]);
+//
+//        kafkaTemplate.send(topic, new Transaction(id, account, amount));
+//    }
 
     public void send(String transactionLine) {
         String[] transactionData = transactionLine.split(", ");

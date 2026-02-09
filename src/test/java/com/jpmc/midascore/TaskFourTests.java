@@ -23,6 +23,9 @@ public class TaskFourTests {
     @Autowired
     private FileLoader fileLoader;
 
+    @Autowired
+    private com.jpmc.midascore.repository.UserRecordRepository userRecordRepository;
+
     @Test
     void task_four_verifier() throws InterruptedException {
         userPopulator.populate();
@@ -38,9 +41,16 @@ public class TaskFourTests {
         logger.info("----------------------------------------------------------");
         logger.info("use your debugger to find out what wilbur's balance is after all transactions are processed");
         logger.info("kill this test once you find the answer");
+        float bal = userRecordRepository.findByName("wilbur")
+                .orElseThrow()
+                .getBalance();
+
+        logger.info("wilbur balance = {}", bal);
+        logger.info("wilbur balance floored = {}", (int) Math.floor(bal));
         while (true) {
             Thread.sleep(20000);
             logger.info("...");
+
         }
     }
 }

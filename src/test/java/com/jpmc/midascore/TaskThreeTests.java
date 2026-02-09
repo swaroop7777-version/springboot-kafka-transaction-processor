@@ -18,6 +18,9 @@ public class TaskThreeTests {
     private KafkaProducer kafkaProducer;
 
     @Autowired
+    private com.jpmc.midascore.repository.UserRecordRepository userRecordRepository;
+
+    @Autowired
     private UserPopulator userPopulator;
 
     @Autowired
@@ -38,9 +41,16 @@ public class TaskThreeTests {
         logger.info("----------------------------------------------------------");
         logger.info("use your debugger to find out what waldorf's balance is after all transactions are processed");
         logger.info("kill this test once you find the answer");
+        float bal = userRecordRepository.findByName("waldorf")
+                .orElseThrow()
+                .getBalance();
+
+        logger.info("waldorf balance = {}", bal);
+        logger.info("waldorf balance floored = {}", (int) Math.floor(bal));
         while (true) {
             Thread.sleep(20000);
             logger.info("...");
+
         }
     }
 }
